@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.Models;
+package com.codewithshubh.covid_19tracker.Models;
 
 public class CountrywiseModel {
     private String country;

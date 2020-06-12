@@ -1,4 +1,4 @@
-package com.example.covid_19tracker;
+package com.codewithshubh.covid_19tracker;
 
 import android.content.Context;
 

@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.Adapters;
+package com.codewithshubh.covid_19tracker.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.covid_19tracker.EachDistrictDataActivity;
-import com.example.covid_19tracker.Models.DistrictWiseModel;
-import com.example.covid_19tracker.R;
+import com.codewithshubh.covid_19tracker.EachDistrictDataActivity;
+import com.codewithshubh.covid_19tracker.Models.DistrictWiseModel;
+import com.codewithshubh.covid_19tracker.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;

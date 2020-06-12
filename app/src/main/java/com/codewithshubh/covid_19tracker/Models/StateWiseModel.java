@@ -1,28 +1,30 @@
-package com.example.covid_19tracker.Models;
+package com.codewithshubh.covid_19tracker.Models;
 
-public class DistrictWiseModel {
-    private String district;
+public class StateWiseModel {
+    private String state;
     private String confirmed;
     private String active;
-    private String recovered;
     private String deceased;
     private String newConfirmed;
     private String newRecovered;
     private String newDeceased;
+    private String lastupdate;
+    private String recovered;
 
-    public DistrictWiseModel(String district, String confirmed, String active, String recovered, String deceased, String newConfirmed, String newRecovered, String newDeceased) {
-        this.district = district;
+    public StateWiseModel(String state, String confirmed, String active, String deceased, String newConfirmed, String newRecovered, String newDeceased, String lastupdate, String recovered) {
+        this.state = state;
         this.confirmed = confirmed;
         this.active = active;
-        this.recovered = recovered;
         this.deceased = deceased;
         this.newConfirmed = newConfirmed;
         this.newRecovered = newRecovered;
         this.newDeceased = newDeceased;
+        this.lastupdate = lastupdate;
+        this.recovered = recovered;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getState() {
+        return state;
     }
 
     public String getConfirmed() {
@@ -31,10 +33,6 @@ public class DistrictWiseModel {
 
     public String getActive() {
         return active;
-    }
-
-    public String getRecovered() {
-        return recovered;
     }
 
     public String getDeceased() {
@@ -51,5 +49,13 @@ public class DistrictWiseModel {
 
     public String getNewDeceased() {
         return newDeceased;
+    }
+
+    public String getLastupdate() {
+        return lastupdate;
+    }
+
+    public String getRecovered() {
+        return recovered;
     }
 }

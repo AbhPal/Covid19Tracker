@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.covid_19tracker">
+    package="com.codewithshubh.covid_19tracker">
 
     <application
         android:allowBackup="true"
@@ -9,22 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.codewithshubh.covid_19tracker.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EachCountryActivity" />
-        <activity android:name=".CountrywiseDataActivity" />
-        <activity android:name=".EachDistrictDataActivity" />
-        <activity android:name=".DistrictwiseDataActivity" />
-        <activity android:name=".EachStateDataActivity" />
-        <activity android:name=".AboutActivity" />
-        <activity android:name=".WorldDataActivity" />
-        <activity android:name=".StateWiseDataActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.codewithshubh.covid_19tracker.EachCountryActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.CountrywiseDataActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.EachDistrictDataActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.DistrictwiseDataActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.EachStateDataActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.AboutActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.WorldDataActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.StateWiseDataActivity" />
+        <activity android:name="com.codewithshubh.covid_19tracker.MainActivity">
         </activity>
     </application>
 

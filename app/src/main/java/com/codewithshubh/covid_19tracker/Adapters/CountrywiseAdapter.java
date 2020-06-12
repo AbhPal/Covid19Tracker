@@ -1,4 +1,4 @@
-package com.example.covid_19tracker.Adapters;
+package com.codewithshubh.covid_19tracker.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.covid_19tracker.EachCountryActivity;
-import com.example.covid_19tracker.Models.CountrywiseModel;
-import com.example.covid_19tracker.R;
+import com.codewithshubh.covid_19tracker.EachCountryActivity;
+import com.codewithshubh.covid_19tracker.Models.CountrywiseModel;
+import com.codewithshubh.covid_19tracker.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
