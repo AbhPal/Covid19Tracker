@@ -4,11 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -20,6 +25,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -38,6 +48,7 @@ public class WorldDataActivity extends AppCompatActivity {
     private String totalDeceased;
     private String newDeceased;
     private String tests;
+    private String version, appURL;
 
     TextView textView_confirmed, textView_confirmed_new, textView_totalActive, textView_totalRecovered, textView_totalRecovered_new, textView_death, textView_death_new, textView_tests;
     ProgressDialog progressDialog;
@@ -75,6 +86,8 @@ public class WorldDataActivity extends AppCompatActivity {
             }
         });
     }
+
+
     public void FetchData() {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         String apiUrl = "https://corona.lmao.ninja/v2/all";

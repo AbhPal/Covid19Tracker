@@ -3,11 +3,22 @@ package com.example.covid_19tracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -28,6 +39,8 @@ public class EachCountryActivity extends AppCompatActivity {
 
     TextView perCountryConfirmed, perCountryActive, perCountryDeceased, perCountryNewConfirmed, perCountryTests, perCountryNewDeceased, perCountryRecovered;
     PieChart mPieChart;
+
+    private String version, appURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,4 +109,5 @@ public class EachCountryActivity extends AppCompatActivity {
             finish();
         return super.onOptionsItemSelected(item);
     }
+
 }

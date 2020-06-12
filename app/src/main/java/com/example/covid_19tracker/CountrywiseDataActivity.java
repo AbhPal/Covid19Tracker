@@ -6,12 +6,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,6 +29,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.covid_19tracker.Adapters.CountrywiseAdapter;
 import com.example.covid_19tracker.Models.CountrywiseModel;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,10 +68,13 @@ public class CountrywiseDataActivity extends AppCompatActivity {
     SwipeRefreshLayout swipeRefreshLayout;
     EditText search;
 
+    String version, appURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_countrywise_data);
+
 
         Objects.requireNonNull(getSupportActionBar()).setTitle("World Data (Select Country)");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -106,6 +119,8 @@ public class CountrywiseDataActivity extends AppCompatActivity {
             }
         });
     }
+
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home)

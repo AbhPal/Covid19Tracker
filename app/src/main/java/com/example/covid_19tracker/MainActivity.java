@@ -6,10 +6,14 @@ import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -26,6 +30,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -40,7 +49,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private String confirmed, active, date, recovered, deaths, newConfirmed, newDeaths, newRecovered, totalTests, totalTestsCopy, oldTests;
     private int testsInt;
@@ -55,11 +64,15 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private String version;
+    private String appURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CheckForUpdate();
 
         //setting navigation bar color
         //getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
@@ -427,4 +440,68 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout = findViewById(R.id.activity_main_refreshLayout);
         textview_time = findViewById(R.id.activity_main_time_textView);
     }
+
+    private void CheckForUpdate() {
+        try {
+            version = this.getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+            Log.d("Version: ", version);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("Version").child("versionName");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String versionName = (String) dataSnapshot.getValue();
+
+                if(!versionName.equals(version)) {
+                    //Toast.makeText(MainActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+
+                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("New Version Available!")
+                            .setMessage("Please update our app to the latest version for continuous use.")
+                            .setPositiveButton("UPDATE", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Version").child("appURL");
+                                    myRef.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            appURL = dataSnapshot.getValue().toString();
+                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appURL)));
+                                            finish();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
+                                }
+                            })
+                            .setNegativeButton("EXIT", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            })
+                            .create();
+
+                    alertDialog.setCancelable(false);
+                    alertDialog.setCanceledOnTouchOutside(false);
+
+                    alertDialog.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
