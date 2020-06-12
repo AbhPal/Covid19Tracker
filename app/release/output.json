@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.covid_19tracker",
+  "applicationId": "com.codewithshubh.covid_19tracker",
   "variantName": "release",
   "elements": [
     {
